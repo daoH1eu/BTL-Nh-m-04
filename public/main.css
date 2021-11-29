@@ -1,0 +1,106 @@
+* {
+    max-width: 1400px;
+}
+
+#img {
+    margin-top: 18px; 
+    margin-left: 10px; 
+    max-width: 376px;
+}
+
+.btn {
+    margin-bottom: 5px;
+}
+
+.headline {
+    background-color: cadetblue;
+    color: white;
+    font-style: italic;
+}
+
+.col-lg-2 {
+    border: 1px solid black;
+    margin: 5px;
+}
+
+.slot:hover {
+    cursor: pointer;
+    transition: 0.5s;
+    background-color: rgb(236, 89, 121);
+    color: white;
+}
+
+.slot-taken {
+    background-color: #2121a4;
+    color: white;
+}
+
+.col-no-boarder {
+    border: none;
+    text-align: center;
+}
+
+.white-letter {
+    color: white;
+}
+
+.rfid-gate {
+    height: 80px;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: rgb(190, 183, 183);
+}
+
+/* @media only screen and (max-width: 3000px) {
+    .led1-text {
+        margin-bottom: 35px;
+    }
+
+    .led2-text {
+        margin-bottom: 35px;
+    }
+  } */
+
+.list-group-item {
+    transition: 1s;
+}
+
+.table-head {
+    background-color: rgba(243, 243, 52, 0.829);
+    color: rgb(7, 5, 5);
+    display: flex;
+}
+
+.info-container:hover {
+    cursor: pointer;
+    background-color: rgba(128, 128, 122, 0.589);
+    color: white;
+    transition: 0.5s;
+}
+
+.parked-list {
+    overflow-y: scroll;
+    width: 504px;
+    height: 166px;
+    display: table-caption;
+    border: 1px solid grey;
+}
+
+.id-table {
+    width: 27%;
+}
+
+
+
+.plate-table {
+    width: 36%;
+}
+
+.id-parked {
+    width: 29%;
+}
+
+.plateNumber-parked {
+    width: 38%;
+}

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <title>Hello, world!</title>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="jquery.js"></script>
+    <script src="socket.io/socket.io.js"> </script>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <style>
+        .sc2::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        .sc2::-webkit-scrollbar-track {
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        .sc2::-webkit-scrollbar-thumb {
+            background-color: silver;
+            border-radius: 10px;
+        }
+
+        table tbody {
+            display: block;
+            max-height: 170px;
+            overflow-y: scroll;
+        }
+
+        table thead,
+        table tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="headline">
+            <h1 style="padding-left: 10px; height: 55px;">
+                Vehicle Information
+            </h1>
+        </div>
+        <div class="row my-3">
+            <div class="col-3 ps-4">
+                <ul class="list-group border border-success">
+                    <li class="list-group-item">Parked: <span id="parkingSlot"></span> </li>
+                    <li class="list-group-item">ID: <span id="id"></span> </li>
+                    <li class="list-group-item">Owner: <span id="owner"></span> </li>
+                    <li class="list-group-item">Plate number: <span id="plateNumber"></span> </li>
+                    <li class="list-group-item">Address: <span id="address"></span> </li>
+                </ul>
+            </div>
+            <div class="col-3 px-3">
+
+                <ul class="list-group border border-success">
+
+                    <li class="list-group-item">Mark: <span id="mark"></span> </li>
+                    <li class="list-group-item">Model: <span id="model"></span> </li>
+                    <li class="list-group-item">Type: <span id="type"></span> </li>
+                    <li class="list-group-item">Reserved time: <span id="reservedTime"></span> </li>
+                    <li class="list-group-item">Amount payable: <span id="amountPayable"></span> </li>
+                </ul>
+            </div>
+            <div class="col-6 pe-4">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-light text-center">
+                        <tr>
+                            <th scope="col" class="id-table">ID</th>
+                            <th scope="col" class="plate-table">Plate number</th>
+                            <th scope="col" class="owner-table">Owner</th>
+                        </tr>
+                    </thead>
+                    <tbody class="sc2 text-center">
+                        <tr class="info-container">
+                            <th scope="row" class="id-parked">1253160109</th>
+                            <td class="plateNumber-parked">99A-666.66</td>
+                            <td class="owner-parked">Trương Đình Quang</td>
+                        </tr>
+                        <tr class="info-container">
+                            <th scope="row" class="id-parked">1793178798</th>
+                            <td class="plateNumber-parked">29A-777.77</td>
+                            <td class="owner-parked">Hà Quang Khải</td>
+                        </tr>
+                        <tr class="info-container">
+                            <th scope="row" class="id-parked">2862040756</th>
+                            <td class="plateNumber-parked">29A-333.33</td>
+                            <td class="owner-parked">Nguyễn Đức Hà</td>
+                        </tr>
+                        <tr class="info-container">
+                            <th scope="row" class="id-parked">181764013</th>
+                            <td class="plateNumber-parked">36A-345.67</td>
+                            <td class="owner-parked">Bùi Xuân Tuấn</td>
+                        </tr>
+                        <tr class="info-container">
+                            <th scope="row" class="id-parked">173351604</th>
+                            <td class="plateNumber-parked">98A-222.22</td>
+                            <td class="owner-parked">Nguyễn Quang Huy</td>
+                        </tr>
+                        <tr class="info-container">
+                            <th scope="row" class="id-parked">3938217902</th>
+                            <td class="plateNumber-parked">99A-456.78</td>
+                            <td class="owner-parked">Kiều Anh Quân</td>
+                        </tr>
+                        <tr class="info-container">
+                            <th scope="row" class="id-parked">3938407853</th>
+                            <td class="plateNumber-parked">18A-121.21</td>
+                            <td class="owner-parked">Ngô Ngọc Thương</td>
+                        </tr>
+                        <tr class="info-container">
+                            <th scope="row" class="id-parked">709308339</th>
+                            <td class="plateNumber-parked">90A-555.55</td>
+                            <td class="owner-parked">Hoàng Tất Thăng</td>
+                        </tr>
+                        <tr class="info-container">
+                            <th scope="row" class="id-parked">437994932</th>
+                            <td class="plateNumber-parked">18A-111.11</td>
+                            <td class="owner-parked">Vũ Văn Thành</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- <div style="display: -webkit-box;">
+            <ul class="list-group" style=" margin-right: 10px; max-width: 20%;">
+                <li class="list-group-item">Parked: <span id="parkingSlot"></span> </li>
+                <li class="list-group-item">ID: <span id="id"></span> </li>
+                <li class="list-group-item">Owner: <span id="owner"></span> </li>
+                <li class="list-group-item">Plate number: <span id="plateNumber"></span> </li>
+                <li class="list-group-item">Address: <span id="address"></span> </li>
+            </ul>
+
+            <ul class="list-group" style=" margin-right: 10px; max-width: 20%;">
+
+                <li class="list-group-item">Mark: <span id="mark"></span> </li>
+                <li class="list-group-item">Model: <span id="model"></span> </li>
+                <li class="list-group-item">Type: <span id="type"></span> </li>
+                <li class="list-group-item">Reserved time: <span id="reservedTime"></span> </li>
+                <li class="list-group-item">Amount payable: <span id="amountPayable"></span> </li>
+            </ul>
+
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" class="id-table">ID</th>
+                        <th scope="col" class="plate-table">Plate number</th>
+                        <th scope="col" class="owner-table">Owner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" class="id-parked">1253160109</th>
+                        <td class="plateNumber-parked">99A-666.66</td>
+                        <td class="owner-parked">Trương Đình Quang</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="id-parked">1793178798</th>
+                        <td class="plateNumber-parked">29A-777.77</td>
+                        <td class="owner-parked">Hà Quang Khải</td>
+                    </tr>
+                    <tr class="info-container">
+                        <th scope="row" class="id-parked">2862040756</th>
+                        <td class="plateNumber-parked">29A-333.33</td>
+                        <td class="owner-parked">Nguyễn Đức Hà</td>
+                    </tr>
+                    <tr class="info-container">
+                        <th scope="row" class="id-parked">181764013</th>
+                        <td class="plateNumber-parked">36A-345.67</td>
+                        <td class="owner-parked">Bùi Xuân Tuấn</td>
+                    </tr>
+                    <tr class="info-container">
+                        <th scope="row" class="id-parked">173351604</th>
+                        <td class="plateNumber-parked">98A-222.22</td>
+                        <td class="owner-parked">Nguyễn Quang Huy</td>
+                    </tr>
+                    <tr class="info-container">
+                        <th scope="row" class="id-parked">3938217902</th>
+                        <td class="plateNumber-parked">99A-456.78</td>
+                        <td class="owner-parked">Kiều Anh Quân</td>
+                    </tr>
+                    <tr class="info-container">
+                        <th scope="row" class="id-parked">3938407853</th>
+                        <td class="plateNumber-parked">18A-121.21</td>
+                        <td class="owner-parked">Ngô Ngọc Thương</td>
+                    </tr>
+                    <tr class="info-container">
+                        <th scope="row" class="id-parked">709308339</th>
+                        <td class="plateNumber-parked">90A-555.55</td>
+                        <td class="owner-parked">Hoàng Tất Thăng</td>
+                    </tr>
+                    <tr class="info-container">
+                        <th scope="row" class="id-parked">437994932</th>
+                        <td class="plateNumber-parked">18A-111.11</td>
+                        <td class="owner-parked">Vũ Văn Thành</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> -->
+    </div>
+
+    <div>
+        <div class="headline">
+            <h1 style="padding-left: 10px; height: 55px;">
+                Parking Grid
+            </h1>
+        </div>
+
+        <div class="container" style=" min-width: 500px;">
+            <div class="row">
+                <div class="col-md-auto">
+                    <img src="/img/compass_icon.png" alt="" style="width: 5em;">
+                </div>
+                <div class="col" style="border: none;">
+                    <div class="row">
+                        <div class="col col-lg-2 slot" id="a1">A1</div>
+                        <div class="col-auto white-letter">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 slot" id="a2">A2</div>
+                        <div class="col-auto white-letter">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 slot" id="a3">B1</div>
+                        <div class="col-auto white-letter">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 slot" id="a4">B2</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-lg-2 col-no-boarder white-letter">
+                            Road
+                        </div>
+                        <div class="col-auto ">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 col-no-boarder white-letter">
+                            Road
+                        </div>
+                        <div class="col-auto ">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 col-no-boarder white-letter">
+                            Road
+                        </div>
+                        <div class="col-auto">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 col-no-boarder white-letter">
+                            Road
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-lg-2 slot " id="b1">A3</div>
+                        <div class="col-auto white-letter">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 slot" id="b2">A4</div>
+                        <div class="col-auto white-letter">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 slot" id="b3">B3</div>
+                        <div class="col-auto white-letter">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 slot " id="b4">B4</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-lg-2 col-no-boarder white-letter">
+                            Road
+                        </div>
+                        <div class="col-auto ">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 col-no-boarder white-letter">
+                            Road
+                        </div>
+                        <div class="col-auto ">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 col-no-boarder white-letter">
+                            Road
+                        </div>
+                        <div class="col-auto">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 col-no-boarder white-letter">
+                            Road
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-lg-2 slot " id="c1">C1</div>
+                        <div class="col-auto white-letter">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 slot" id="c2">C2</div>
+                        <div class="col-auto white-letter">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 slot" id="c3">D1</div>
+                        <div class="col-auto white-letter">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 slot" id="c4">D2</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-lg-2 col-no-boarder white-letter">
+                            Road
+                        </div>
+                        <div class="col-auto ">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 col-no-boarder white-letter">
+                            Road
+                        </div>
+                        <div class="col-auto ">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 col-no-boarder white-letter">
+                            Road
+                        </div>
+                        <div class="col-auto ">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 col-no-boarder white-letter">
+                            Road
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-lg-2 slot " id="d1">C3</div>
+                        <div class="col-auto white-letter">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 slot" id="d2">C4</div>
+                        <div class="col-auto white-letter">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 slot " id="d3">D3</div>
+                        <div class="col-auto white-letter">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 slot" id="d4">D4</div>
+                    </div>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col col-lg-2 col-no-boarder white-letter">
+                            D1
+                        </div>
+                        <div class="col-auto white-letter">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 rfid-gate">
+                            RFID Gate
+                        </div>
+                        <div class="col-auto white-letter">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 rfid-gate">
+                            RFID Gate
+                        </div>
+                        <div class="col-auto white-letter">
+                            Road
+                        </div>
+                        <div class="col col-lg-2 col-no-boarder white-letter">
+                            D4
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+
+</body>
+
+</html>
