@@ -1,5 +1,5 @@
 # BTL-Nhóm-04
-BTL Nhóm 4: WEBSITE THEO DÕI  XE ĐỖ TRONG BÃI
+BTL Nhóm 4: WEBSITE THEO DÕI CÁC VỊ TRÍ XE ĐỖ TRONG BÃI
 
 - Giao diện: Khi có xe đỗ thì vị trí tương ứng trên web sẽ đổi sang màu đỏ, đồng thời thông tin xe sẽ hiện thì lên bảng bên góc phải.
 
