@@ -8,6 +8,6 @@ BTL Nhóm 4: WEBSITE THEO DÕI CÁC VỊ TRÍ XE ĐỖ TRONG BÃI
 
 <img src="https://user-images.githubusercontent.com/84682521/143848173-15e4c23b-7586-46f1-ab94-221bff4d330e.jpg" width="90%"></img>
 
-- Mô hình
+- Mô Hình Thử Nghiệm
 
 <img src="https://user-images.githubusercontent.com/84682521/143847706-15644c43-384f-4991-afe1-6926096779a5.jpg" width="45%"></img> <img src="https://user-images.githubusercontent.com/84682521/143847699-231c24a7-44d0-4790-86d2-921cc27a7a85.jpg" width="45%"></img>
